@@ -51,7 +51,7 @@ startup-funding-analysis/
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/YOUR-USERNAME/startup-funding-analysis.git
+   git clone https://github.com/Dhrumit-Rana/startup-funding-analysis.git
    cd startup-funding-analysis
    ```
 
