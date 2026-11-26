@@ -38,25 +38,27 @@ def load_overall_analysis():
      #sector analysis pie
      sector=df.groupby('vertical')['amount'].sum().sort_values(ascending=False).head(10)
 
-     st.header('MoM Graph')
-     selected_options=st.selectbox('Select Type',['Total','Count'])
-     if selected_options=='Total':
-        temp_df=df.groupby(['year','month'])['amount'].sum().reset_index()
-     else:
-        temp_df=df.groupby(['year','month'])['amount'].count().reset_index()  
+     col5,col6=st.columns(2)
+     with col5:
+        st.header('MoM Graph')
+        selected_options=st.selectbox('Select Type',['Total','Count'])
+        if selected_options=='Total':
+            temp_df=df.groupby(['year','month'])['amount'].sum().reset_index()
+        else:
+            temp_df=df.groupby(['year','month'])['amount'].count().reset_index()  
 
-     temp_df['x_axis']=temp_df['month'].astype(str)+'-'+temp_df['year'].astype(str)
+        temp_df['x_axis']=temp_df['month'].astype(str)+'-'+temp_df['year'].astype(str)
 
-     fig0,ax0= plt.subplots()
-     ax0.plot(temp_df['x_axis'],temp_df['amount'])
-     st.pyplot(fig0)
-
-     #city wise funding
-     city_wise_funding=df.groupby('city')['amount'].sum().sort_values(ascending=False).head(10)
-     st.subheader('City Wise Funding')
-     fig2,ax2 = plt.subplots()
-     ax2.pie(city_wise_funding,labels=city_wise_funding.index,autopct='%0.01f')
-     st.pyplot(fig2)
+        fig0,ax0= plt.subplots()
+        ax0.plot(temp_df['x_axis'],temp_df['amount'])
+        st.pyplot(fig0)
+     with col6:
+        #city wise funding
+        city_wise_funding=df.groupby('city')['amount'].sum().sort_values(ascending=False).head(10)
+        st.header('City Wise Funding')
+        fig2,ax2 = plt.subplots()
+        ax2.pie(city_wise_funding,labels=city_wise_funding.index,autopct='%0.01f')
+        st.pyplot(fig2)
 
      st.header('Top StartUps')
 
